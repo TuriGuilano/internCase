@@ -1,2 +1,1 @@
-# internCase
-Intern case for MediaMonks
+# Private Repo
