@@ -1,0 +1,100 @@
+/*--- Declaration CSS variables ---*/
+  :root {
+    /*--- General colors ---*/
+    --base-color-white: #fff;
+    --base-color-black: #000;
+    /*--- End ---*/
+
+    /*--- Hover state ---*/
+    --hover-state: #D3D3D3;
+    /*--- End ---*/
+
+    /*--- Font  family ---*/
+    --main-font: 'Klavica-regular', sans-serif;
+    /*--- End ---*/
+
+    /*--- Font sizes ---*/
+    --font-size-small: 0.8em;
+    --font-size-normal: 1em;
+    --font-size-big: 1.2em;
+    /*--- End ---*/
+
+    /*--- Basic scaler variable ---*/
+    --base-scaler: 1em;
+    /*--- End ---*/
+  }
+/*--- End of declaration css variables ---*/
+
+/*--- Reset for development purpose ---*/
+  html, body {
+    margin: 0;
+  }
+  .overlay {
+    display: none;
+  }
+/*--- End ---*/
+
+/*--- Slider container styles ---*/
+  .slider-container {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    /*overflow-x: scroll;*/
+    position: relative;
+  }
+
+  .slider-container-inner {
+    display: flex;
+    /*flex-direction: row;*/
+    position: absolute;
+  }
+
+  .slider-container-inner > article {
+    position: relative;
+  }
+
+  .slider-container-inner > article h1 {
+    position: absolute;
+    color: var(--base-color-white);
+    top: 50%;
+    left: 10%;
+    transform: translateY(-50%);
+  }
+/*--- End ---*/
+
+/*--- Controlls styles ---*/
+  .next::after, .previous::after {
+    content: ">";
+    position: absolute;
+    top: 50%;
+    right: 0;
+    color: var(--base-color-white);
+    font-size: calc( 2.5 * var(--base-scaler));
+    width: 1em;
+    height: 3em;
+    font-family: sans-serif;
+    transform: translateY(-50%);
+    cursor: pointer;
+    transition: 0.2s linear;
+  }
+
+  .previous::after {
+    content: "<";
+    left: 0;
+    text-align: right;
+  }
+
+  .next:hover::after {
+    opacity: .5;
+    margin-right: -.2em;
+  }
+
+  .previous:hover::after {
+    opacity: .5;
+    margin-left: -.2em;
+  }
+/*--- End ---*/
+
+
+/*--- Generic styles ---*/
+/*--- End ---*/
