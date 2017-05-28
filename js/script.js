@@ -23,15 +23,15 @@ let carousels = document.getElementsByClassName('slider-container');
     })
   }
 
-  // function checkState() {
-  //   if(imageIndex == 0) {
-  //     previous.style.display = 'none';
-  //   } else {
-  //       previous.style.display = 'block';
-  //     }
-  // }
-  //
-  // checkState();
+  function checkState() {
+    if(imageIndex == 0) {
+      previous.style.display = 'none';
+    } else {
+        previous.style.display = 'block';
+      }
+  }
+
+  checkState();
 
   function nextImg () {
     inner.style.left = -width * imageIndex + 'px';
@@ -48,11 +48,12 @@ let carousels = document.getElementsByClassName('slider-container');
   next.addEventListener('click', function () {
     imageIndex ++;
 
+    checkState();
+
     if(imageIndex >= images.length) {
       imageIndex = images.length -1;
     }
 
-    // checkState();
     nextImg();
   });
 
@@ -63,9 +64,16 @@ let carousels = document.getElementsByClassName('slider-container');
       imageIndex = images.length -1;
     }
 
-    // checkState();
     nextImg();
   });
 
   nextImg();
 });
+
+// For demo purpose i call the setTimeout which calls the ready instead of removing the element instant
+function ready() {
+  var elem = document.getElementById("remove");
+  elem.parentNode.removeChild(elem);
+}
+
+document.addEventListener("DOMContentLoaded", setTimeout(ready, 2000));
