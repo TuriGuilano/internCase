@@ -1,3 +1,10 @@
+@font-face {
+  font-family: klavika;
+  src: local('klavika light'),
+       local(sans-serif);
+  font-weight: bold;
+}
+
 /*--- Declaration CSS variables ---*/
   :root {
     /*--- General colors ---*/
@@ -10,7 +17,7 @@
     /*--- End ---*/
 
     /*--- Font  family ---*/
-    --main-font: 'Klavica-regular', sans-serif;
+    --main-font: 'Klavica light', sans-serif;
     /*--- End ---*/
 
     /*--- Font sizes ---*/
@@ -47,18 +54,30 @@
     display: flex;
     /*flex-direction: row;*/
     position: absolute;
+    transition: left 2s ease-out;
   }
 
   .slider-container-inner > article {
     position: relative;
+    /*transition: left 3s ease-out;*/
   }
 
   .slider-container-inner > article h1 {
+    margin: 0;
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
+    max-width: 10em;
+    font-size: calc(3 * var(--font-size-big));
     position: absolute;
     color: var(--base-color-white);
     top: 50%;
     left: 10%;
     transform: translateY(-50%);
+  }
+
+  .slider-container-inner > article:first-of-type h1 {
+    top: 2.5em;
+    left: .5em;
   }
 /*--- End ---*/
 
@@ -72,10 +91,11 @@
     font-size: calc( 2.5 * var(--base-scaler));
     width: 1em;
     height: 3em;
-    font-family: sans-serif;
     transform: translateY(-50%);
     cursor: pointer;
     transition: 0.2s linear;
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
   }
 
   .previous::after {
@@ -95,6 +115,49 @@
   }
 /*--- End ---*/
 
+/*--- Square counter styles ---*/
+  .block-selection {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    bottom: 1em;
+    left: 2em;
+    right: 0;
+    border: .15em dotted white;
+    width: 15vw;
+    /*margin-bottom: calc(.5 / var(--base-scaler));*/
+  }
 
-/*--- Generic styles ---*/
+  .block-selection > .square {
+    margin: .2em;
+    /*background-color: var(--base-color-white);*/
+    border-left: .15em dotted white;
+    /*border-right: .15em dotted white;*/
+    border-radius: .1em;
+    width: .8em;
+    height: .8em;
+    display: inline-block;
+    opacity: 1;
+    /*transition: opacity 0.1s;*/
+    color: var(--base-color-white);
+    padding: .2em;
+    text-align: right;
+    cursor: pointer;
+  }
+
+  .block-selection > .square:first-of-type {
+    border-left: none;
+  }
+
+  .block-selection > .square:hover {
+    opacity: .65;
+  }
+
+  /*.block-selection > .square:active {
+    opacity: 1;
+  }*/
+
+  .active {
+    background-color: white;
+  }
 /*--- End ---*/
