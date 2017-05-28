@@ -19,16 +19,15 @@ let carousels = document.getElementsByClassName('slider-container');
 
     s.addEventListener('click', function () {
       imageIndex = i;
+
       nextImg();
+      checkState();
     })
   }
 
   function checkState() {
-    if(imageIndex == 0) {
-      previous.style.display = 'none';
-    } else {
-        previous.style.display = 'block';
-      }
+    imageIndex == 0 ? previous.style.display = 'none' : previous.style.display = 'block';
+    imageIndex == squares.length - 1 ? next.style.display = 'none' : next.style.display = 'block';
   }
 
   checkState();
@@ -59,6 +58,8 @@ let carousels = document.getElementsByClassName('slider-container');
 
   previous.addEventListener('click', function () {
     imageIndex --;
+
+    checkState();
 
     if(imageIndex < 0) {
       imageIndex = images.length -1;
