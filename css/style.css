@@ -1,3 +1,21 @@
+@keyframes monk {
+  0% {
+    width: 1.5em;
+  }
+  100% {
+    width: 7em;
+  }
+}
+
+@keyframes text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @font-face {
   font-family: klavika;
   src: local('klavika light'),
@@ -36,9 +54,41 @@
   html, body {
     margin: 0;
   }
+
   .overlay {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 10;
+    background-image: url("../images/loaderbg.png");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
+
+  .overlay > img {
+    width: 1em;
+    margin: 0 auto;
+    animation: monk 3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+  }
+
+  .overlay p:first-of-type {
+    position: fixed;
+    top: 60%;
+    left: 45%;
+    transform: translateY(-50%);
+    color: var(--base-color-white);
+    text-align: center;
+    animation: text 6s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+  }
+
 /*--- End ---*/
 
 /*--- Slider container styles ---*/
@@ -46,20 +96,18 @@
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    /*overflow-x: scroll;*/
     position: relative;
+    z-index: 1;
   }
 
   .slider-container-inner {
     display: flex;
-    /*flex-direction: row;*/
     position: absolute;
-    transition: left 2s ease-out;
+    transition: left 2s;
   }
 
   .slider-container-inner > article {
     position: relative;
-    /*transition: left 3s ease-out;*/
   }
 
   .slider-container-inner > article h1 {
@@ -125,20 +173,16 @@
     right: 0;
     border: .15em dotted white;
     width: 15vw;
-    /*margin-bottom: calc(.5 / var(--base-scaler));*/
   }
 
   .block-selection > .square {
     margin: .2em;
-    /*background-color: var(--base-color-white);*/
     border-left: .15em dotted white;
-    /*border-right: .15em dotted white;*/
     border-radius: .1em;
     width: .8em;
     height: .8em;
     display: inline-block;
     opacity: 1;
-    /*transition: opacity 0.1s;*/
     color: var(--base-color-white);
     padding: .2em;
     text-align: right;
@@ -153,11 +197,111 @@
     opacity: .65;
   }
 
-  /*.block-selection > .square:active {
-    opacity: 1;
-  }*/
-
   .active {
     background-color: white;
   }
+
+  .block-selection > span {
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
+    font-size: var(--font-size-normal);
+  }
 /*--- End ---*/
+
+/*** Start details block ***/
+  .details {
+    position: absolute;
+    width: 50vw;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    padding-right: 1em;
+    background-color: var(--base-color-black);
+    text-align: right;
+  }
+
+  .details > h1 {
+    margin: 0;
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
+    font-size: calc(3 * var(--font-size-big));
+    color: var(--base-color-white);
+  }
+
+  .details > article {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 40%;
+  }
+
+  .details > article > p {
+    text-align: right;
+    right: 0;
+    color: var(--base-color-white);
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
+    font-size: var(--font-size-normal);
+    padding-right: 1em;
+  }
+
+  .details > article > p > a {
+    color: var(--base-color-white);
+    text-decoration: underline;
+  }
+
+  .details > article > ul {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  .details > article > ul > li {
+    list-style-type: none;
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
+    color: var(--base-color-white);
+    margin-right: 1em;
+    font-size: var(--font-size-normal);
+  }
+
+  .details > article > ul > li > a {
+    text-decoration: none;
+    color: var(--base-color-white);
+  }
+
+  .details > article > ul > li > a > img {
+    max-width: 1em;
+    height: 1em;
+    padding-right: .4em;
+  }
+
+  .details > article > ul > li > a > img:first-of-type {
+    margin-bottom: -.2em;
+  }
+/*** End ***/
+
+/*** Start page text ***/
+  .statement {
+    position: absolute;
+    bottom: 4em;
+    left: 2em;
+    z-index: 1;
+    color: var(--base-color-white);
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
+    font-size: var(--font-size-normal);
+    max-width: 33em;
+
+  }
+/*** End ***/
+
+/*** Footer styles ***/
+  footer {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    z-index: 1;
+  }
+/*** End ***/
