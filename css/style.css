@@ -28,6 +28,7 @@
     /*--- General colors ---*/
     --base-color-white: #fff;
     --base-color-black: #000;
+    --left:0
     /*--- End ---*/
 
     /*--- Hover state ---*/
@@ -67,6 +68,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    display: none;
   }
 
   .overlay > img {
@@ -103,7 +105,8 @@
   .slider-container-inner {
     display: flex;
     position: absolute;
-    transition: left 2s;
+    transition: transform 1s;
+    transform: translateX(var(--left));
   }
 
   .slider-container-inner > article {
@@ -120,9 +123,14 @@
     color: var(--base-color-white);
     top: 50%;
     left: 10%;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
+    opacity:0;
+    transition:all .5s .5s ease-in;
   }
-
+  .slider-container-inner > article.active h1 {
+    opacity:1;
+    transform: translateY(-60%)
+  }
   .slider-container-inner > article:first-of-type h1 {
     top: 2.5em;
     left: .5em;
@@ -179,8 +187,8 @@
     margin: .2em;
     border-left: .15em dotted white;
     border-radius: .1em;
-    width: 1em;
-    height: 1em;
+    width: .8em;
+    height: .8em;
     display: inline-block;
     opacity: 1;
     color: var(--base-color-white);
@@ -198,7 +206,7 @@
   }
 
   .active {
-    background-color: var(--base-color-white);
+    background-color: white;
   }
 
   .block-selection > span {
@@ -303,5 +311,15 @@
     bottom: 1em;
     right: 1em;
     z-index: 1;
+  }
+/*** End ***/
+
+/*** Show and hide classes ***/
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
   }
 /*** End ***/
