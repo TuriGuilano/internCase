@@ -179,8 +179,8 @@
     margin: .2em;
     border-left: .15em dotted white;
     border-radius: .1em;
-    width: .8em;
-    height: .8em;
+    width: 1em;
+    height: 1em;
     display: inline-block;
     opacity: 1;
     color: var(--base-color-white);
@@ -198,7 +198,7 @@
   }
 
   .active {
-    background-color: white;
+    background-color: var(--base-color-white);
   }
 
   .block-selection > span {
