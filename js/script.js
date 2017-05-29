@@ -1,28 +1,39 @@
-const slider = document.getElementsByClassName('slider-container');
+(function() {
 
-[].forEach.call(slider, function (e) {
-  let next = e.getElementsByClassName('next')[0],
-      previous = e.getElementsByClassName('previous')[0],
-      blockSelection = e.getElementsByClassName('block-selection')[0],
-      inner = e.getElementsByClassName('slider-container-inner')[0],
-      slides = e.getElementsByClassName('slide'),
-      slideIndex = 0,
-      width = window.innerWidth,
-      squares = [];
+  const slider = document.querySelector('.slider-container');
+  let   next = document.querySelector('.next'),
+        previous = document.querySelector('.previous'),
+        blockSelection = document.querySelector('.block-selection'),
+        inner = document.querySelector('.slider-container-inner'),
+        slides = document.querySelectorAll('.slide'),
+        statement = document.querySelector('.statement'),
+        pathCounter = document.querySelector('.step-counter'),
+        slideIndex = 0,
+        width = window.innerWidth,
+        squares = [],
+        varNum = document.querySelector('.varNum');
+        pathContainer = [];
 
-  for(let i = 0; i < slides.length; i++) {
-    let s = document.createElement('span');
-    s.classList.add('square');
-    s.innerHTML = i;
-    blockSelection.appendChild(s);
-    squares.push(s);
+  function createCounter() {
+    for(let i = 0; i < slides.length; i++) {
+      let s = document.createElement('span');
+          s.classList.add('square');
+          s.innerHTML = i;
+      blockSelection.appendChild(s);
+      squares.push(s);
 
-    s.addEventListener('click', function () {
-      slideIndex = i;
-      nextImg();
-      checkState();
-    })
+      s.addEventListener('click', function () {
+        slideIndex = i;
+
+        removeStatement();
+        addPath();
+        nextImg();
+        checkState();
+      });
+    }
   }
+
+  createCounter();
 
   function checkState() {
     slideIndex == 0 ? previous.style.display = 'none' : previous.style.display = 'block';
@@ -33,48 +44,64 @@ const slider = document.getElementsByClassName('slider-container');
 
   function nextImg () {
     inner.style.setProperty('--left', `${-width * slideIndex}px`);
-
     squares.forEach(function(s, i) {
       if(i === slideIndex) {
         slides[i].classList.add('active');
         s.classList.add('active');
       } else {
-        slides[i].classList.remove('active');
-        s.classList.remove('active');
-      }
-    })
+          slides[i].classList.remove('active');
+          s.classList.remove('active');
+        }
+    });
   }
 
   next.addEventListener('click', function () {
     slideIndex ++;
-
     checkState();
+    addPath();
+    removeStatement();
+    // showPath();
 
     if(slideIndex >= slides.length) {
       slideIndex = slides.length -1;
     }
-
     nextImg();
   });
 
   previous.addEventListener('click', function () {
-    slideIndex --;
 
+    slideIndex --;
     checkState();
+    removeStatement()
+    addPath();
 
     if(slideIndex < 0) {
       slideIndex = slides.length -1;
     }
-
     nextImg();
   });
 
-  nextImg();
-});
+  function removeStatement() {
+    if(slideIndex > 0) {
+      statement.style.display = 'none';
+    } else {
+      statement.style.display = 'block';
+    }
+  }
 
-function ready() {
-  var elem = document.getElementById("remove");
-  elem.parentNode.removeChild(elem);
-}
+  function addPath() {
+    varNum.innerHTML = slideIndex;
+    if(slideIndex < 1) {
+      pathCounter.style.display = 'none';
+    } else {
+      pathCounter.style.display = 'block';
+    }
+  }
 
-document.addEventListener("DOMContentLoaded", setTimeout(ready, 2000));
+  function ready() {
+    var elem = document.getElementById("remove");
+    elem.parentNode.removeChild(elem);
+  }
+
+  document.addEventListener("DOMContentLoaded", setTimeout(ready, 2000));
+})();

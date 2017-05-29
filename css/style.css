@@ -68,7 +68,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    display: none;
+    /*display: none;*/
   }
 
   .overlay > img {
@@ -144,10 +144,10 @@
     top: 50%;
     right: 0;
     color: var(--base-color-white);
-    font-size: calc( 2.5 * var(--base-scaler));
+    font-size: calc( 5.5 * var(--base-scaler));
     width: 1em;
     height: 3em;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
     cursor: pointer;
     transition: 0.2s linear;
     font-family: klavika, sans-serif;
@@ -181,6 +181,7 @@
     right: 0;
     border: .15em dotted white;
     width: 15vw;
+    max-width: 15em;
   }
 
   .block-selection > .square {
@@ -206,10 +207,22 @@
   }
 
   .active {
-    background-color: white;
+    background-color: var(--base-color-white);
   }
 
   .block-selection > span {
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
+    font-size: var(--font-size-normal);
+  }
+
+  .step-counter {
+    z-index: 100;
+    position: absolute;
+    color: var(--base-color-white);
+    bottom: 0em;
+    left: 17em;
+    display: none;
     font-family: klavika, sans-serif;
     font-weight: lighter;
     font-size: var(--font-size-normal);
