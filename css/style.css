@@ -28,6 +28,7 @@
     /*--- General colors ---*/
     --base-color-white: #fff;
     --base-color-black: #000;
+    --left:0
     /*--- End ---*/
 
     /*--- Hover state ---*/
@@ -67,6 +68,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    /*display: none;*/
   }
 
   .overlay > img {
@@ -103,7 +105,8 @@
   .slider-container-inner {
     display: flex;
     position: absolute;
-    transition: left 2s;
+    transition: transform 1s;
+    transform: translateX(var(--left));
   }
 
   .slider-container-inner > article {
@@ -120,9 +123,14 @@
     color: var(--base-color-white);
     top: 50%;
     left: 10%;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
+    opacity:0;
+    transition:all .5s .5s ease-in;
   }
-
+  .slider-container-inner > article.active h1 {
+    opacity:1;
+    transform: translateY(-60%)
+  }
   .slider-container-inner > article:first-of-type h1 {
     top: 2.5em;
     left: .5em;
@@ -136,10 +144,10 @@
     top: 50%;
     right: 0;
     color: var(--base-color-white);
-    font-size: calc( 2.5 * var(--base-scaler));
+    font-size: calc( 5.5 * var(--base-scaler));
     width: 1em;
     height: 3em;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
     cursor: pointer;
     transition: 0.2s linear;
     font-family: klavika, sans-serif;
@@ -173,6 +181,7 @@
     right: 0;
     border: .15em dotted white;
     width: 15vw;
+    max-width: 15em;
   }
 
   .block-selection > .square {
@@ -198,10 +207,22 @@
   }
 
   .active {
-    background-color: white;
+    background-color: var(--base-color-white);
   }
 
   .block-selection > span {
+    font-family: klavika, sans-serif;
+    font-weight: lighter;
+    font-size: var(--font-size-normal);
+  }
+
+  .step-counter {
+    z-index: 100;
+    position: absolute;
+    color: var(--base-color-white);
+    bottom: 0em;
+    left: 17em;
+    display: none;
     font-family: klavika, sans-serif;
     font-weight: lighter;
     font-size: var(--font-size-normal);
@@ -303,5 +324,15 @@
     bottom: 1em;
     right: 1em;
     z-index: 1;
+  }
+/*** End ***/
+
+/*** Show and hide classes ***/
+  .hide {
+    display: none;
+  }
+
+  .show {
+    display: block;
   }
 /*** End ***/

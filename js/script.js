@@ -1,80 +1,107 @@
-let carousels = document.getElementsByClassName('slider-container');
+(function() {
 
-[].forEach.call(carousels, function (e) {
-  let next = e.getElementsByClassName('next')[0],
-      previous = e.getElementsByClassName('previous')[0],
-      blockSelection = e.getElementsByClassName('block-selection')[0],
-      inner = e.getElementsByClassName('slider-container-inner')[0],
-      images = e.getElementsByClassName('view'),
-      imageIndex = 0,
-      width = window.innerWidth,
-      squares = [];
+  const slider = document.querySelector('.slider-container');
+  let   next = document.querySelector('.next'),
+        previous = document.querySelector('.previous'),
+        blockSelection = document.querySelector('.block-selection'),
+        inner = document.querySelector('.slider-container-inner'),
+        slides = document.querySelectorAll('.slide'),
+        statement = document.querySelector('.statement'),
+        pathCounter = document.querySelector('.step-counter'),
+        slideIndex = 0,
+        width = window.innerWidth,
+        squares = [],
+        varNum = document.querySelector('.varNum');
+        pathContainer = [];
 
-  for(let i = 0; i < images.length; i++) {
-    let s = document.createElement('span');
-    s.classList.add('square');
-    s.innerHTML = i;
-    blockSelection.appendChild(s);
-    squares.push(s);
+  function createCounter() {
+    for(let i = 0; i < slides.length; i++) {
+      let s = document.createElement('span');
+          s.classList.add('square');
+          s.innerHTML = i;
+      blockSelection.appendChild(s);
+      squares.push(s);
 
-    s.addEventListener('click', function () {
-      imageIndex = i;
+      s.addEventListener('click', function () {
+        slideIndex = i;
 
-      nextImg();
-      checkState();
-    })
+        removeStatement();
+        addPath();
+        nextImg();
+        checkState();
+      });
+    }
   }
 
+  createCounter();
+
   function checkState() {
-    imageIndex == 0 ? previous.style.display = 'none' : previous.style.display = 'block';
-    imageIndex == squares.length - 1 ? next.style.display = 'none' : next.style.display = 'block';
+    slideIndex == 0 ? previous.style.display = 'none' : previous.style.display = 'block';
+    slideIndex == squares.length - 1 ? next.style.display = 'none' : next.style.display = 'block';
   }
 
   checkState();
 
   function nextImg () {
-    inner.style.left = -width * imageIndex + 'px';
-
+    inner.style.setProperty('--left', `${-width * slideIndex}px`);
     squares.forEach(function(s, i) {
-      if(i === imageIndex) {
+      if(i === slideIndex) {
+        slides[i].classList.add('active');
         s.classList.add('active');
       } else {
-        s.classList.remove('active');
-      }
-    })
+          slides[i].classList.remove('active');
+          s.classList.remove('active');
+        }
+    });
   }
 
   next.addEventListener('click', function () {
-    imageIndex ++;
-
+    slideIndex ++;
     checkState();
+    addPath();
+    removeStatement();
+    // showPath();
 
-    if(imageIndex >= images.length) {
-      imageIndex = images.length -1;
+    if(slideIndex >= slides.length) {
+      slideIndex = slides.length -1;
     }
-
     nextImg();
   });
 
   previous.addEventListener('click', function () {
-    imageIndex --;
 
+    slideIndex --;
     checkState();
+    removeStatement()
+    addPath();
 
-    if(imageIndex < 0) {
-      imageIndex = images.length -1;
+    if(slideIndex < 0) {
+      slideIndex = slides.length -1;
     }
-
     nextImg();
   });
 
-  nextImg();
-});
+  function removeStatement() {
+    if(slideIndex > 0) {
+      statement.style.display = 'none';
+    } else {
+      statement.style.display = 'block';
+    }
+  }
 
-// For demo purpose i call the setTimeout which calls the ready instead of removing the element instant
-function ready() {
-  var elem = document.getElementById("remove");
-  elem.parentNode.removeChild(elem);
-}
+  function addPath() {
+    varNum.innerHTML = slideIndex;
+    if(slideIndex < 1) {
+      pathCounter.style.display = 'none';
+    } else {
+      pathCounter.style.display = 'block';
+    }
+  }
 
-document.addEventListener("DOMContentLoaded", setTimeout(ready, 2000));
+  function ready() {
+    var elem = document.getElementById("remove");
+    elem.parentNode.removeChild(elem);
+  }
+
+  document.addEventListener("DOMContentLoaded", setTimeout(ready, 2000));
+})();
