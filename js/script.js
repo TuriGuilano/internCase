@@ -38,7 +38,6 @@
       s.addEventListener('click', function () {
         slideIndex = i;
 
-        // removeStatement();
         addStep();
         animateSlide();
         checkState();
@@ -93,13 +92,11 @@
     var beta = statement.classList;
 
     if(slideIndex > 0) {
-      // stepCounter.classList.add('show');
       showElem(alpha);
       hideElem(beta);
     } else {
       hideElem(alpha);
       showElem(beta);
-      // stepCounter.classList.remove('show');
     }
   }
 
