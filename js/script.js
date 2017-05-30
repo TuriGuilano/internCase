@@ -19,6 +19,7 @@
       let s = document.createElement('span');
           s.classList.add('square');
           s.innerHTML = i;
+
       blockSelection.appendChild(s);
       squares.push(s);
 
@@ -57,10 +58,10 @@
 
   next.addEventListener('click', function () {
     slideIndex ++;
+
     checkState();
     addPath();
     removeStatement();
-    // showPath();
 
     if(slideIndex >= slides.length) {
       slideIndex = slides.length -1;
@@ -71,6 +72,7 @@
   previous.addEventListener('click', function () {
 
     slideIndex --;
+
     checkState();
     removeStatement()
     addPath();
@@ -82,19 +84,23 @@
   });
 
   function removeStatement() {
+    var stat = statement.classList;
     if(slideIndex > 0) {
-      statement.style.display = 'none';
+      stat.add('hide');
+      // statement.style.display = 'none';
     } else {
-      statement.style.display = 'block';
+      stat.add('show');
+      // statement.style.display = 'block';
     }
   }
 
   function addPath() {
     varNum.innerHTML = slideIndex;
+    var pC = pathCounter.classList;
     if(slideIndex < 1) {
-      pathCounter.style.display = 'none';
+      pC.add('hide');
     } else {
-      pathCounter.style.display = 'block';
+      pC.add('show');
     }
   }
 
