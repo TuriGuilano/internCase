@@ -68,7 +68,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    /*display: none;*/
+    /display: none;
   }
 
   .overlay > img {
@@ -97,9 +97,12 @@
   .slider-container {
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    overflow-x:scroll;
     position: relative;
     z-index: 1;
+  }
+  .js-enabled .slider-container {
+    overflow:hidden;
   }
 
   .slider-container-inner {
@@ -124,12 +127,15 @@
     top: 50%;
     left: 10%;
     transform: translateY(-40%);
-    opacity:0;
+    opacity:1;
     transition:all .5s .5s ease-in;
+  }
+  .js-enabled .slider-container-inner > article h1 {
+    opacity:0;
   }
   .slider-container-inner > article.active h1 {
     opacity:1;
-    transform: translateY(-60%)
+    transform: translateY(-80%)
   }
   .slider-container-inner > article:first-of-type h1 {
     top: 2.5em;
@@ -138,6 +144,7 @@
 /*--- End ---*/
 
 /*--- Controlls styles ---*/
+
   .next::after, .previous::after {
     content: ">";
     position: absolute;
@@ -152,7 +159,13 @@
     transition: 0.2s linear;
     font-family: klavika, sans-serif;
     font-weight: lighter;
+    display:none;
   }
+
+  .js-enabled .next::after, .js-enabled .previous::after {
+    display:block;
+  }
+
 
   .previous::after {
     content: "<";
