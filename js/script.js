@@ -1,48 +1,67 @@
 (function() {
-
-  const slider = document.querySelector('.slider-container');
-  let   next = document.querySelector('.next'),
+  // Variables
+  const slider = document.querySelector('.slider-container'),
+        body = document.body,
+        next = document.querySelector('.next'),
         previous = document.querySelector('.previous'),
         blockSelection = document.querySelector('.block-selection'),
         inner = document.querySelector('.slider-container-inner'),
         slides = document.querySelectorAll('.slide'),
         statement = document.querySelector('.statement'),
-        pathCounter = document.querySelector('.step-counter'),
-        slideIndex = 0,
+        stepCounter = document.querySelector('.step-counter'),
         width = window.innerWidth,
         squares = [],
         varNum = document.querySelector('.varNum');
         pathContainer = [];
 
-  function createCounter() {
+  let slideIndex = 0;
+
+  // Initialize program
+  document.addEventListener('DOMContentLoaded', setTimeout(ready, 2000));
+
+  createSlideNav();
+
+  handleEvents();
+
+  checkState();
+
+  // Functions
+  function createSlideNav() {
     for(let i = 0; i < slides.length; i++) {
       let s = document.createElement('span');
           s.classList.add('square');
           s.innerHTML = i;
+
       blockSelection.appendChild(s);
       squares.push(s);
 
       s.addEventListener('click', function () {
         slideIndex = i;
 
-        removeStatement();
-        addPath();
-        nextImg();
+        // removeStatement();
+        addStep();
+        animateSlide();
         checkState();
       });
     }
   }
 
-  createCounter();
+  function changeSlide (dir) {
+    let direction
+    dir ? direction = dir : direction = this.dataset.direction;
+    direction === 'next' ? slideIndex ++ : slideIndex --;
 
-  function checkState() {
-    slideIndex == 0 ? previous.style.display = 'none' : previous.style.display = 'block';
-    slideIndex == squares.length - 1 ? next.style.display = 'none' : next.style.display = 'block';
+    checkState();
+    addStep();
+
+    if(slideIndex >= slides.length || slideIndex < 0) {
+      slideIndex = slides.length -1;
+    }
+
+    animateSlide();
   }
 
-  checkState();
-
-  function nextImg () {
+  function animateSlide () {
     inner.style.setProperty('--left', `${-width * slideIndex}px`);
     squares.forEach(function(s, i) {
       if(i === slideIndex) {
@@ -55,53 +74,59 @@
     });
   }
 
-  next.addEventListener('click', function () {
-    slideIndex ++;
-    checkState();
-    addPath();
-    removeStatement();
-    // showPath();
+  function checkState() {
+    slideIndex == 0 ? previous.classList.add('hide') : previous.classList.remove('hide');
+    slideIndex == squares.length - 1 ? next.classList.add('hide') : next.classList.remove('hide');
+  }
 
-    if(slideIndex >= slides.length) {
-      slideIndex = slides.length -1;
-    }
-    nextImg();
-  });
+  function showElem(elem) {
+    elem.add('show');
+  }
 
-  previous.addEventListener('click', function () {
+  function hideElem(elem) {
+    elem.add('hide');
+  }
 
-    slideIndex --;
-    checkState();
-    removeStatement()
-    addPath();
+  function addStep(alpha, beta) {
+    varNum.innerHTML = slideIndex;
+    var alpha = stepCounter.classList;
+    var beta = statement.classList;
 
-    if(slideIndex < 0) {
-      slideIndex = slides.length -1;
-    }
-    nextImg();
-  });
-
-  function removeStatement() {
     if(slideIndex > 0) {
-      statement.style.display = 'none';
+      // stepCounter.classList.add('show');
+      showElem(alpha);
+      hideElem(beta);
     } else {
-      statement.style.display = 'block';
+      hideElem(alpha);
+      showElem(beta);
+      // stepCounter.classList.remove('show');
     }
   }
 
-  function addPath() {
-    varNum.innerHTML = slideIndex;
-    if(slideIndex < 1) {
-      pathCounter.style.display = 'none';
-    } else {
-      pathCounter.style.display = 'block';
-    }
+  function handleEvents() {
+    // Events
+    next.addEventListener('click', changeSlide);
+
+    previous.addEventListener('click', changeSlide);
+
+    // Key events
+    document.onkeydown = function(e) {
+      switch (e.keyCode) {
+          case 37:
+              changeSlide('previous')
+              break;
+          case 39:
+              changeSlide('next')
+              break;
+      }
+    };
   }
 
   function ready() {
+    body.classList.add('js-enabled');
     var elem = document.getElementById("remove");
     elem.parentNode.removeChild(elem);
+
   }
 
-  document.addEventListener("DOMContentLoaded", setTimeout(ready, 2000));
 })();
