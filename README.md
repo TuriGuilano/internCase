@@ -4,7 +4,7 @@
 
 > Description
 
-In this case I made a rebuild of the old MediaMonks website on how to become a monk.
+In this case I made a rebuild of the old MediaMonks website on how to become a monk. http://devmonks.vellance.net/p/path/
 I worked with Html Css & Javascript, no libraries as stated in the assignment. Unfortunately I started with the Desktop variant
 and was not able to make it in time to make the page responsive. I should have started mobile first :(
 
