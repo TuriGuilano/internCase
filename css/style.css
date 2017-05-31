@@ -7,6 +7,17 @@
   }
 }
 
+@Keyframes remove {
+  0% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 @keyframes text {
   0% {
     opacity: 0;
@@ -68,6 +79,9 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    animation: remove 3s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
   }
 
   .overlay > img {
@@ -89,7 +103,6 @@
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
   }
-
 /*--- End ---*/
 
 /*--- Slider container styles ---*/

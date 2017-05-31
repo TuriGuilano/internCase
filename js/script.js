@@ -46,8 +46,8 @@
   }
 
   function changeSlide (dir) {
-    let direction
-    dir ? direction = dir : direction = this.dataset.direction;
+    let direction = this.dataset.direction;
+    // dir ? direction = dir : direction = this.dataset.direction;
     direction === 'next' ? slideIndex ++ : slideIndex --;
 
     checkState();
@@ -110,10 +110,16 @@
     document.onkeydown = function(e) {
       switch (e.keyCode) {
           case 37:
-              changeSlide('previous')
+              slideIndex --;
+              checkState();
+              animateSlide();
+              addStep();
               break;
           case 39:
-              changeSlide('next')
+              slideIndex ++;
+              checkState();
+              animateSlide();
+              addStep();
               break;
       }
     };
@@ -121,9 +127,8 @@
 
   function ready() {
     body.classList.add('js-enabled');
-    var elem = document.getElementById("remove");
+    const elem = document.getElementById("remove");
     elem.parentNode.removeChild(elem);
-
   }
 
 })();
