@@ -110,17 +110,25 @@
     document.onkeydown = function(e) {
       switch (e.keyCode) {
           case 37:
-              slideIndex --;
-              checkState();
-              animateSlide();
-              addStep();
-              break;
+              if(slideIndex > 0) {
+                slideIndex --;
+              }
+              if(slideIndex > -1) {
+                checkState();
+                animateSlide();
+                addStep();
+                break;
+              }
           case 39:
-              slideIndex ++;
-              checkState();
-              animateSlide();
-              addStep();
-              break;
+              if(slideIndex < 6) {
+                slideIndex ++;
+              }
+              if(slideIndex < slides.length) {
+                checkState();
+                animateSlide();
+                addStep();
+                break;
+              }
       }
     };
   }
