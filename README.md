@@ -25,4 +25,4 @@ Besides the key events the website also works without Javascript. The image cont
 * [ ] Slide navigation in HTML instead of Javascript to enable navigation without Javascript (deeplinks)
 
 
-Live link: https://turiguilano.github.io/internCase/
+Live link:
